@@ -21,6 +21,10 @@ function targetHit() {
         points++;
         generateTarget();
         console.log(points);
+      } else {
+        points--; // penalty if user misclicks
+        generateTarget();
+        console.log(points);
       }
     });
   }
@@ -28,4 +32,4 @@ function targetHit() {
 
 targetHit();
 
-setInterval(generateTarget, 1000);
+setInterval(generateTarget, 2500);
