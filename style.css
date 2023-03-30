@@ -5,6 +5,14 @@
 
 body {
   background-color: dimgrey;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 3rem;
 }
 
 #container {
@@ -21,4 +29,10 @@ body {
   margin: 20% 15px 0 15px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+#points {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 3rem;
 }
