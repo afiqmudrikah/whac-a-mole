@@ -8,7 +8,8 @@ body {
 }
 
 #container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
   justify-content: center;
 }
 
