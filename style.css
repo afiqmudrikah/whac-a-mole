@@ -15,6 +15,12 @@ h1 {
   font-size: 3rem;
 }
 
+#time-limit {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2rem;
+}
+
 #container {
   display: grid;
   grid-template-columns: repeat(3, auto);
