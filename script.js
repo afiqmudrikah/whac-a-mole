@@ -5,8 +5,10 @@ let points = 0;
 
 let timer;
 let movingTarget;
-let currentTime = 5;
+let currentTime;
 const timeLimit = document.querySelector('#time-limit');
+
+let gameOver;
 
 // initialize game
 function initGame() {
@@ -16,6 +18,8 @@ function initGame() {
   displayPoints.textContent = `Points: ${(points = 0)}`;
   movingTarget = setInterval(generateTarget, 2500);
   timer = setInterval(countdown, 1000);
+  currentTime = 10;
+  gameOver = false;
 }
 
 startBtn.addEventListener('click', initGame);
@@ -31,14 +35,13 @@ function generateTarget() {
 }
 
 function targetHit() {
-  for (let i = 0; i < grid.length; i++) {
-    grid[i].addEventListener('click', function () {
-      if (grid[i].hasAttribute('style', 'background-color: red')) {
-        // alert('Hit!');
+  for (const target of grid) {
+    target.addEventListener('click', function () {
+      if (target.hasAttribute('style', 'background-color: red')) {
         points++;
         generateTarget();
         displayPoints.textContent = `Points: ${points}`;
-      } else {
+      } else if (!gameOver) {
         points--; // penalty if user misclicks
         displayPoints.textContent = `Points: ${points}`;
       }
@@ -52,9 +55,12 @@ function countdown() {
   timeLimit.textContent = currentTime;
 
   if (currentTime === 0) {
-    console.log('Suppose to stop');
+    gameOver = true;
     clearInterval(timer);
     clearInterval(movingTarget);
     alert(`Game is over, your points is ${points}`);
+    for (const target of grid) {
+      target.removeAttribute('style', 'background-color: red');
+    }
   }
 }
