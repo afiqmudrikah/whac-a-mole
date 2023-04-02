@@ -7,7 +7,7 @@ let timer; // Game time countdown variable
 let currentTime; // Initial game time at start
 const timeLimit = document.querySelector('#time-limit');
 
-let gameOver; // Game state variable
+let gameOver = true; // Game state variable
 
 // Initialize game
 function initGame() {
