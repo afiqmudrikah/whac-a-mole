@@ -8,6 +8,8 @@ let currentTime; // Initial game time at start
 const timeLimit = document.querySelector('#time-limit');
 
 let gameOver = true; // Game state variable
+let hiscore = 0;
+const newHiscore = document.querySelector('#hiscore');
 
 // Initialize game
 function initGame() {
@@ -67,6 +69,7 @@ function countdown() {
     gameOver = true;
     clearInterval(timer);
     alert(`Game is over, your points is ${points}`);
+    checkHiscore();
     for (const target of grid) {
       target.removeAttribute('style', 'background-color: red');
     }
@@ -82,5 +85,12 @@ function randomTime(min, max) {
 function clearGrid() {
   for (const target of grid) {
     target.removeAttribute('style', 'background-color: red');
+  }
+}
+
+function checkHiscore() {
+  if (points > hiscore) {
+    hiscore = points;
+    newHiscore.textContent = `Current hiscore: ${hiscore}`;
   }
 }

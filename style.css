@@ -9,15 +9,14 @@ body {
   align-items: center;
 }
 
-h1 {
+h1,
+#time-limit {
   text-align: center;
   margin-top: 20px;
   font-size: 3rem;
 }
 
 #time-limit {
-  text-align: center;
-  margin-top: 20px;
   font-size: 2rem;
 }
 
@@ -29,8 +28,8 @@ h1 {
 
 .grid {
   background-color: beige;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   border: 2px solid black;
   margin: 20% 15px 0 15px;
   border-radius: 50%;
@@ -40,5 +39,10 @@ h1 {
 #points {
   text-align: center;
   margin-top: 20px;
+  font-size: 3rem;
+}
+
+#hiscore {
+  text-align: center;
   font-size: 3rem;
 }
