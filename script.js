@@ -3,43 +3,51 @@ const displayPoints = document.querySelector('#points');
 let startBtn = document.querySelector('#startBtn');
 let points = 0;
 
-let timer;
-let movingTarget;
-let currentTime;
+let timer; // Game time countdown variable
+let currentTime; // Initial game time at start
 const timeLimit = document.querySelector('#time-limit');
 
-let gameOver;
+let gameOver; // Game state variable
 
-// initialize game
+// Initialize game
 function initGame() {
-  for (const target of grid) {
-    target.removeAttribute('style', 'background-color: red');
-  }
+  clearGrid();
   displayPoints.textContent = `Points: ${(points = 0)}`;
-  movingTarget = setInterval(generateTarget, 2500);
-  timer = setInterval(countdown, 1000);
+  generateRandomInterval();
+  timer = setInterval(countdown, 1000); // (set to 1sec per interval)
   currentTime = 10;
   gameOver = false;
 }
 
 startBtn.addEventListener('click', initGame);
 
+// Generates random 'target' grid
 function generateTarget() {
-  for (const target of grid) {
-    target.removeAttribute('style', 'background-color: red');
-  }
+  clearGrid();
   const gridTarget = document.querySelectorAll('.grid');
-  const randomNum = Math.floor(Math.random() * 8); // generates pseudo-random integer
+  const randomNum = Math.floor(Math.random() * 9); // Generates pseudo-random integer
   const newTarget = gridTarget[randomNum];
   newTarget.setAttribute('style', 'background-color: red');
 }
 
+// Generates a random time and calls generateTarget()
+function generateRandomInterval() {
+  let generateRandomTime = randomTime(500, 2000);
+  setTimeout(() => {
+    if (!gameOver) {
+      generateTarget();
+      generateRandomInterval();
+    }
+  }, generateRandomTime);
+}
+
+// Handles the click event
 function targetHit() {
   for (const target of grid) {
     target.addEventListener('click', function () {
       if (target.hasAttribute('style', 'background-color: red')) {
         points++;
-        generateTarget();
+        clearGrid();
         displayPoints.textContent = `Points: ${points}`;
       } else if (!gameOver) {
         points--; // penalty if user misclicks
@@ -50,6 +58,7 @@ function targetHit() {
 }
 targetHit();
 
+// Function that runs down the game time
 function countdown() {
   currentTime--;
   timeLimit.textContent = currentTime;
@@ -57,10 +66,21 @@ function countdown() {
   if (currentTime === 0) {
     gameOver = true;
     clearInterval(timer);
-    clearInterval(movingTarget);
     alert(`Game is over, your points is ${points}`);
     for (const target of grid) {
       target.removeAttribute('style', 'background-color: red');
     }
+  }
+}
+
+// Generates a random number within a specified range
+function randomTime(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+
+// Clears the grid
+function clearGrid() {
+  for (const target of grid) {
+    target.removeAttribute('style', 'background-color: red');
   }
 }
