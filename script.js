@@ -22,6 +22,7 @@ function initGame() {
   timer = setInterval(countdown, 1000); // (set to 1sec per interval)
   currentTime = 10;
   gameOver = false;
+  selectDifficulty.setAttribute('disabled', '');
 }
 
 startBtn.addEventListener('click', initGame);
@@ -77,6 +78,7 @@ function countdown() {
     clearInterval(timer);
     alert(`Game is over, your points is ${points}`);
     checkHiscore();
+    selectDifficulty.removeAttribute('disabled', '');
     for (const target of grid) {
       target.removeAttribute('style', 'background-color: red');
     }
