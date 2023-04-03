@@ -11,6 +11,9 @@ let gameOver = true; // Game state variable
 let hiscore = 0;
 const newHiscore = document.querySelector('#hiscore');
 
+let difficultyOfGame = 'easy'; // Default set to 'easy'
+const selectDifficulty = document.querySelector('#select-difficulty');
+
 // Initialize game
 function initGame() {
   clearGrid();
@@ -33,8 +36,12 @@ function generateTarget() {
 }
 
 // Generates a random time and calls generateTarget()
-function generateRandomInterval() {
-  let generateRandomTime = randomTime(500, 2000);
+function generateRandomInterval(min = 1000, max = 2000) {
+  let generateRandomTime = randomTime(min, max);
+  if (difficultyOfGame === 'hard') {
+    generateRandomTime = randomTime((min = 200), (max = 300));
+    console.log('hard', generateRandomTime);
+  }
   setTimeout(() => {
     if (!gameOver) {
       generateTarget();
@@ -63,7 +70,7 @@ targetHit();
 // Function that runs down the game time
 function countdown() {
   currentTime--;
-  timeLimit.textContent = currentTime;
+  timeLimit.textContent = `Time remaining: ${currentTime}`;
 
   if (currentTime === 0) {
     gameOver = true;
@@ -88,9 +95,25 @@ function clearGrid() {
   }
 }
 
+// Checks for new hiscore
 function checkHiscore() {
   if (points > hiscore) {
     hiscore = points;
     newHiscore.textContent = `Current hiscore: ${hiscore}`;
   }
 }
+
+// Sets the difficulty (Easy/Hard)
+function selectionOfDifficulty() {
+  difficultyOfGame = document.querySelector('#select-difficulty').value;
+  if (difficultyOfGame.includes('easy')) {
+    console.log('easy mode');
+    difficultyOfGame = 'easy';
+  } else if (difficultyOfGame.includes('hard')) {
+    console.log('hard mode');
+    difficultyOfGame = 'hard';
+  }
+}
+
+// Listens for option changes
+selectDifficulty.addEventListener('change', selectionOfDifficulty);
