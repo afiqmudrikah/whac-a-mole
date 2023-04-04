@@ -4,8 +4,9 @@ let startBtn = document.querySelector('#startBtn');
 let points = 0;
 
 let timer; // Game time countdown variable
-let currentTime; // Initial game time at start
+let currentTime = 10; // Initial game time at start
 const timeLimit = document.querySelector('#time-limit');
+timeLimit.textContent = `Time remaining: ${currentTime}`;
 
 let gameOver = true; // Game state variable
 let highscore = 0;
@@ -20,7 +21,6 @@ function initGame() {
   displayPoints.textContent = `Points: ${(points = 0)}`;
   generateRandomInterval();
   timer = setInterval(countdown, 1000); // (set to 1sec per interval)
-  currentTime = 10;
   gameOver = false;
   selectDifficulty.setAttribute('disabled', '');
 
