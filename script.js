@@ -8,8 +8,8 @@ let currentTime; // Initial game time at start
 const timeLimit = document.querySelector('#time-limit');
 
 let gameOver = true; // Game state variable
-let hiscore = 0;
-const newHiscore = document.querySelector('#hiscore');
+let highscore = 0;
+const newHighscore = document.querySelector('#highscore');
 
 let difficultyOfGame = 'easy'; // Default set to 'easy'
 const selectDifficulty = document.querySelector('#select-difficulty');
@@ -23,6 +23,9 @@ function initGame() {
   currentTime = 10;
   gameOver = false;
   selectDifficulty.setAttribute('disabled', '');
+
+  // Start screen
+  startScreen.setAttribute('style', 'display:none');
 }
 
 startBtn.addEventListener('click', initGame);
@@ -77,7 +80,7 @@ function countdown() {
     gameOver = true;
     clearInterval(timer);
     alert(`Game is over, your points is ${points}`);
-    checkHiscore();
+    checkHighscore();
     selectDifficulty.removeAttribute('disabled', '');
     for (const target of grid) {
       target.removeAttribute('style', 'background-color: red');
@@ -97,11 +100,11 @@ function clearGrid() {
   }
 }
 
-// Checks for new hiscore
-function checkHiscore() {
-  if (points > hiscore) {
-    hiscore = points;
-    newHiscore.textContent = `Current hiscore: ${hiscore}`;
+// Checks for new highscore
+function checkHighscore() {
+  if (points > highscore) {
+    highscore = points;
+    newHighscore.textContent = `Current highscore: ${highscore}`;
   }
 }
 
@@ -119,3 +122,6 @@ function selectionOfDifficulty() {
 
 // Listens for option changes
 selectDifficulty.addEventListener('change', selectionOfDifficulty);
+
+// Start screen
+const startScreen = document.querySelector('#start-screen');

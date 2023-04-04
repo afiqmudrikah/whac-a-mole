@@ -8,6 +8,14 @@
     <title>Whac-A-Mole</title>
   </head>
   <body>
+    <div id="start-screen">
+      <h1>Whac-A-Mole</h1>
+      <button id="startBtn">Start Game</button>
+      <select id="select-difficulty">
+        <option value="easy">Easy</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
     <h1>Whac-A-Mole</h1>
     <h2 id="time-limit"></h2>
     <div id="container">
@@ -22,12 +30,8 @@
       <div class="grid"></div>
     </div>
     <h2 id="points"></h2>
-    <h2 id="hiscore"></h2>
-    <button id="startBtn">Start Game</button>
-    <select id="select-difficulty">
-      <option value="easy">Easy</option>
-      <option value="hard">Hard</option>
-    </select>
+    <h2 id="highscore"></h2>
+
     <script src="script.js"></script>
   </body>
 </html>
