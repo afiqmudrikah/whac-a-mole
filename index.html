@@ -4,34 +4,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Whac-A-Mole</title>
   </head>
   <body>
     <div id="start-screen">
       <h1>Whac-A-Mole</h1>
-      <div id="button-container">
+      <div id="button-container" class="buttonContainer">
         <a href="#" class="button" id="startBtn">START</a>
-        <h2 id="display-difficulty">Select difficulty:</h2>
+        <h2 id="display-difficulty">Select difficulty: EASY😎</h2>
         <a href="#" class="button difficulty" value="easy">EASY</a>
         <a href="#" class="button difficulty" value="hard">HARD</a>
+        <h2 id="highscore"></h2>
       </div>
     </div>
-    <h1>Whac-A-Mole</h1>
-    <div id="container">
-      <div class="grid"></div>
-      <div class="grid"></div>
-      <div class="grid"></div>
-      <div class="grid"></div>
-      <div class="grid"></div>
-      <div class="grid"></div>
-      <div class="grid"></div>
-      <div class="grid"></div>
-      <div class="grid"></div>
+    <div id="main-screen">
+      <h1>Whac-A-Mole</h1>
+      <div id="container">
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+        <div class="grid hide"></div>
+      </div>
+      <h2 id="time-limit"></h2>
+      <h2 id="points"></h2>
+      <script src="script.js"></script>
     </div>
-    <h2 id="time-limit"></h2>
-    <h2 id="points"></h2>
-    <h2 id="highscore"></h2>
-    <script src="script.js"></script>
   </body>
 </html>

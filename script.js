@@ -20,7 +20,7 @@ const startScreen = document.querySelector('#start-screen');
 
 // Initialize game
 function initGame() {
-  currentTime = 5;
+  currentTime = 10;
   clearGrid();
   displayPoints.textContent = `Points: ${(points = 0)}`;
   generateRandomInterval();
@@ -39,15 +39,14 @@ function generateTarget() {
   const gridTarget = document.querySelectorAll('.grid');
   const randomNum = Math.floor(Math.random() * 9); // Generates pseudo-random integer
   const newTarget = gridTarget[randomNum];
-  newTarget.setAttribute('style', 'background-color: red');
+  newTarget.classList.add('target');
 }
 
 // Generates a random time and calls generateTarget()
 function generateRandomInterval(min = 1000, max = 2000) {
   let generateRandomTime = randomTime(min, max);
   if (difficultyOfGame === 'hard') {
-    generateRandomTime = randomTime((min = 200), (max = 300));
-    console.log('hard', generateRandomTime);
+    generateRandomTime = randomTime((min = 350), (max = 500));
   }
   setTimeout(() => {
     if (!gameOver) {
@@ -61,7 +60,7 @@ function generateRandomInterval(min = 1000, max = 2000) {
 function targetHit() {
   for (const target of grid) {
     target.addEventListener('click', function () {
-      if (target.hasAttribute('style', 'background-color: red')) {
+      if (target.classList.contains('target')) {
         points++;
         clearGrid();
         displayPoints.textContent = `Points: ${points}`;
@@ -82,12 +81,10 @@ function countdown() {
   if (currentTime === 0) {
     gameOver = true;
     clearInterval(timer);
-    // alert(`Game is over, your points is ${points}`);
+    alert(`Game is over, your points is ${points}`);
     checkHighscore();
     startScreen.setAttribute('style', 'display:');
-    for (const target of grid) {
-      target.removeAttribute('style', 'background-color: red');
-    }
+    clearGrid();
   }
 }
 
@@ -99,7 +96,7 @@ function randomTime(min, max) {
 // Clears the grid
 function clearGrid() {
   for (const target of grid) {
-    target.removeAttribute('style', 'background-color: red');
+    target.classList.remove('target');
   }
 }
 
@@ -107,7 +104,14 @@ function clearGrid() {
 function checkHighscore() {
   if (points > highscore) {
     highscore = points;
-    newHighscore.textContent = `Current highscore: ${highscore}`;
+    newHighscore.textContent = `Current highscore: ${highscore}
+    You're AMAZING!`;
+  } else if (points < highscore && highscore === 0) {
+    newHighscore.textContent = `Current highscore: ${highscore}
+    No points?`;
+  } else {
+    newHighscore.textContent = `Current highscore: ${highscore}
+    Try again!`;
   }
 }
 
