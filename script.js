@@ -11,16 +11,17 @@ timeLimit.textContent = `Time remaining: `;
 let gameOver = true; // Game state variable
 let highscore = 0;
 const newHighscore = document.querySelector('#highscore');
+const userPoints = document.querySelector('#user-points');
+const setHighscoreMsg = document.querySelector('#new-highscore');
 
 let difficultyOfGame = 'easy'; // Default set to 'easy'
 const selectDifficulty = document.querySelectorAll('.difficulty');
 
-// Start screen
 const startScreen = document.querySelector('#start-screen');
 
 // Initialize game
 function initGame() {
-  currentTime = 10;
+  currentTime = 5;
   clearGrid();
   displayPoints.textContent = `Points: ${(points = 0)}`;
   generateRandomInterval();
@@ -46,7 +47,7 @@ function generateTarget() {
 function generateRandomInterval(min = 1000, max = 2000) {
   let generateRandomTime = randomTime(min, max);
   if (difficultyOfGame === 'hard') {
-    generateRandomTime = randomTime((min = 350), (max = 500));
+    generateRandomTime = randomTime((min = 500), (max = 650));
   }
   setTimeout(() => {
     if (!gameOver) {
@@ -81,7 +82,7 @@ function countdown() {
   if (currentTime === 0) {
     gameOver = true;
     clearInterval(timer);
-    alert(`Game is over, your points is ${points}`);
+    alert(`Game is over, you scored ${points} points`);
     checkHighscore();
     startScreen.setAttribute('style', 'display:');
     clearGrid();
@@ -102,16 +103,23 @@ function clearGrid() {
 
 // Checks for new highscore
 function checkHighscore() {
+  userPoints.textContent = `Your score: ${points}`;
   if (points > highscore) {
     highscore = points;
+    setHighscoreMsg.setAttribute('style', 'display: block');
+    newHighscore.textContent = `Current highscore: ${highscore}`;
+  } else if (points <= highscore && highscore === 0) {
+    setHighscoreMsg.setAttribute('style', 'display: none');
     newHighscore.textContent = `Current highscore: ${highscore}
-    You're AMAZING!`;
-  } else if (points < highscore && highscore === 0) {
+    (No points?)`;
+  } else if (points === highscore) {
+    setHighscoreMsg.setAttribute('style', 'display: none');
     newHighscore.textContent = `Current highscore: ${highscore}
-    No points?`;
+    (Tied highscore!)`;
   } else {
+    setHighscoreMsg.setAttribute('style', 'display: none');
     newHighscore.textContent = `Current highscore: ${highscore}
-    Try again!`;
+    (Try again!)`;
   }
 }
 
