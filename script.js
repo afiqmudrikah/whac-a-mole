@@ -1,27 +1,24 @@
 const grid = document.querySelectorAll('.grid');
 const displayPoints = document.querySelector('#points');
-let startBtn = document.querySelector('#startBtn');
-let points = 0;
-
-let timer; // Game time countdown variable
-let currentTime; // Initial game time at start
 const timeLimit = document.querySelector('#time-limit');
-timeLimit.textContent = `Time remaining: `;
-
-let gameOver = true; // Game state variable
-let highscore = 0;
 const newHighscore = document.querySelector('#highscore');
 const userPoints = document.querySelector('#user-points');
 const setHighscoreMsg = document.querySelector('#new-highscore');
-
-let difficultyOfGame = 'easy'; // Default set to 'easy'
 const selectDifficulty = document.querySelectorAll('.difficulty');
-
 const startScreen = document.querySelector('#start-screen');
+const startBtn = document.querySelector('#startBtn');
+
+let points = 0;
+let highscore = 0;
+let timer; // Game time countdown variable
+let currentTime; // Initial game time at start
+let gameOver = true; // Game state variable
+let difficultyOfGame = 'easy'; // Default set to 'easy'
+timeLimit.textContent = `Time remaining: `;
 
 // Initialize game
 function initGame() {
-  currentTime = 5;
+  currentTime = 15;
   clearGrid();
   displayPoints.textContent = `Points: ${(points = 0)}`;
   generateRandomInterval();
@@ -31,8 +28,6 @@ function initGame() {
   // Start screen
   startScreen.setAttribute('style', 'display:none');
 }
-
-startBtn.addEventListener('click', initGame);
 
 // Generates random 'target' grid
 function generateTarget() {
@@ -47,7 +42,7 @@ function generateTarget() {
 function generateRandomInterval(min = 1000, max = 2000) {
   let generateRandomTime = randomTime(min, max);
   if (difficultyOfGame === 'hard') {
-    generateRandomTime = randomTime((min = 500), (max = 650));
+    generateRandomTime = randomTime((min = 500), (max = 600));
   }
   setTimeout(() => {
     if (!gameOver) {
@@ -72,13 +67,11 @@ function targetHit() {
     });
   }
 }
-targetHit();
 
 // Function that runs down the game time
 function countdown() {
   currentTime--;
   timeLimit.textContent = `Time remaining: ${currentTime}`;
-
   if (currentTime === 0) {
     gameOver = true;
     clearInterval(timer);
@@ -138,4 +131,8 @@ function selectionOfDifficulty() {
     });
   }
 }
+
+// Functions and event listeners
+startBtn.addEventListener('click', initGame);
+targetHit();
 selectionOfDifficulty();
